@@ -14,7 +14,7 @@ int CalculateDistance(const int speed, const int runDuration, const int restDura
   int time = 0;
   while (time < raceDuration)
   {
-   int runTime = std::min(runDuration, 1234 - time);
+   int runTime = std::min(runDuration, raceDuration - time);
    dist += runTime * speed;
    time += runTime + restDuration;
   }

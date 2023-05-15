@@ -103,7 +103,7 @@ int main()
     From given codebook, there is ambiguity with "yaa" and "z", as well as "yab" and " ".
 
     In order to disambiguate the decoded string, we will need to make the following assumptions:
-      1. Output should be a proper sentence. i.e. All words should be separated by a single spacing
+      1. Output should be a proper sentence. i.e. All words should be separated by a single spacing, and sentence should start and end with words
       2. In the event of ambiguity, word will be chosen to be actual word from the dictionary where possible
         - e.g. 0111111110111111111111000111111100101101 can either be "buyable" or "bu le", but "buyable" will be chosen here as it is an actual word
         - Dictionary used in code below is retrieved from https://svnweb.freebsd.org/base/head/share/dict/web2)
@@ -213,9 +213,15 @@ int main()
   for (const auto& wordToRevert : wordsToRevert)
     decoded = std::regex_replace(decoded, std::regex(wordToRevert.first), wordToRevert.second);
 
-  // Sentence starting with space violates assumption 1, so we will replace space with "yab"
-  if (!decoded.empty() && decoded[0] == ' ')
-    decoded = "yab" + decoded.substr(1);
+  // Sentence starting or ending with space violates assumption 1, so we will replace space with "yab"
+  if (!decoded.empty())
+  {
+    if (decoded[0] == ' ')
+      decoded = "yab" + decoded.substr(1);
+
+    if (decoded.back() == ' ')
+      decoded = decoded.substr(0, decoded.size() - 1) + "yab";
+  }
 
   std::cout << decoded << std::endl;
 }

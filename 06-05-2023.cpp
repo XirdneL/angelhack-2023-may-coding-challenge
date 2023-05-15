@@ -14,9 +14,9 @@ int CalculateDistance(const int speed, const int runDuration, const int restDura
   int time = 0;
   while (time < raceDuration)
   {
-   int runTime = std::min(runDuration, raceDuration - time);
-   dist += runTime * speed;
-   time += runTime + restDuration;
+    int runTime = std::min(runDuration, raceDuration - time);
+    dist += runTime * speed;
+    time += runTime + restDuration;
   }
   return dist;
 }
@@ -24,12 +24,12 @@ int CalculateDistance(const int speed, const int runDuration, const int restDura
 int main()
 {
   std::unordered_map<std::string, int> runnerDistanceMap;
-  runnerDistanceMap["John"] = CalculateDistance(10,6,20);
-  runnerDistanceMap["James"] = CalculateDistance(8,8,25);
-  runnerDistanceMap["Jenna"] = CalculateDistance(12,5,16);
-  runnerDistanceMap["Josh"] = CalculateDistance(7,7,23);
-  runnerDistanceMap["Jacob"] = CalculateDistance(9,4,32);
-  runnerDistanceMap["Jerry"] = CalculateDistance(5,9,18);
+  runnerDistanceMap["John"] = CalculateDistance(10, 6, 20);
+  runnerDistanceMap["James"] = CalculateDistance(8, 8, 25);
+  runnerDistanceMap["Jenna"] = CalculateDistance(12, 5, 16);
+  runnerDistanceMap["Josh"] = CalculateDistance(7, 7, 23);
+  runnerDistanceMap["Jacob"] = CalculateDistance(9, 4, 32);
+  runnerDistanceMap["Jerry"] = CalculateDistance(5, 9, 18);
 
   auto iter = runnerDistanceMap.begin();
   auto furthestDistanceIter = runnerDistanceMap.begin();
